@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saturday Mission Debrief</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="container">
+        <!-- Opening Screen -->
+        <section id="opening-screen" class="screen active">
+            <h1 class="title">Saturday Mission Debrief</h1>
+            <div class="content">
+                <p class="status">Mission Accomplished.</p>
+                <p>The Saturday has officially concluded.</p>
+                <p>The planning department now requires a short debrief report.</p>
+                <p>Don't worry.</p>
+                <p>This is definitely not a performance review.</p>
+            </div>
+            <button id="start-btn" class="primary-btn">Begin Debrief</button>
+        </section>
+
+        <!-- Question 1: Mission Rating -->
+        <section id="q1-screen" class="screen">
+            <h2>How would you rate the mission?</h2>
+            <div class="slider-container">
+                <input type="range" id="missionRating" min="1" max="10" value="5" class="slider">
+                <div class="slider-labels">
+                    <span>We survived.</span>
+                    <span id="q1-val" class="slider-value">5</span>
+                    <span>Worth repeating.</span>
+                </div>
+            </div>
+            <button class="next-btn primary-btn" data-next="q2-screen">Next</button>
+        </section>
+
+        <!-- Question 2: Highlights -->
+        <section id="q2-screen" class="screen">
+            <h2>What were the highlights of the mission?</h2>
+            <p class="subtitle">(Select all that apply)</p>
+            <div class="cards-grid multi-select" id="highlights-options">
+                <div class="card" data-value="Making Lunch">🍳 Making Lunch</div>
+                <div class="card" data-value="Conversations">💬 Conversations</div>
+                <div class="card" data-value="Eating">🍽️ Eating</div>
+                <div class="card" data-value="Random Moments">😄 Random Moments</div>
+                <div class="card" data-value="Spending Time Together">🏠 My House</div>
+                <div class="card" data-value="Something Else">✨ Something Else</div>
+            </div>
+            <button class="next-btn primary-btn" data-next="q3-screen">Next</button>
+        </section>
+
+        <!-- Question 3: Cooking Rating -->
+        <section id="q3-screen" class="screen">
+            <h2>As an independent food critic, how would you rate my cooking?</h2>
+            <div class="slider-container">
+                <input type="range" id="cookingRating" min="1" max="10" value="5" class="slider">
+                <div class="slider-labels">
+                    <span>Kitchen Emergency</span>
+                    <span id="q3-val" class="slider-value">5</span>
+                    <span>Open a Restaurant Immediately</span>
+                </div>
+                <p class="small-note">This review may be used for future bragging purposes.</p>
+            </div>
+            <button class="next-btn primary-btn" data-next="q4-screen">Next</button>
+        </section>
+
+        <!-- Question 4: Bhakri Mission -->
+        <section id="q4-screen" class="screen">
+            <h2>How successful was the Bhakri Mission?</h2>
+            <div class="cards-grid single-select" id="bhakri-options">
+                <div class="card" data-value="Surprisingly Good">🫓 Surprisingly Good</div>
+                <div class="card" data-value="Better Than Expected">🫓 Better Than Expected</div>
+                <div class="card" data-value="We Did Our Best">🫓 We Did Our Best</div>
+                <div class="card" data-value="Let's Not Discuss It">🫓 Let's Not Discuss It</div>
+            </div>
+            <button class="next-btn primary-btn" data-next="q5-screen">Next</button>
+        </section>
+
+        <!-- Question 5: Missed Things -->
+        <section id="q5-screen" class="screen">
+            <h2>Looking back... what did we miss?</h2>
+            <p class="subtitle">(Select all that apply)</p>
+            <div class="cards-grid multi-select" id="missed-options">
+                <div class="card" data-value="Coffee">☕ Coffee</div>
+                <div class="card" data-value="Dessert">🍨 Dessert</div>
+                <div class="card" data-value="A Walk">🚶 A Walk</div>
+                <div class="card" data-value="Music">🎸 Music</div>
+                <div class="card" data-value="Photos">📸 Photos</div>
+                <div class="card" data-value="Nothing">Nothing</div>
+            </div>
+            <p class="small-note">I know coffee is one. You don't need to remind me.</p>
+            <button id="submit-btn" class="primary-btn">Generate Mission Report</button>
+        </section>
+
+        <!-- Analysis Screen -->
+        <section id="analysis-screen" class="screen">
+            <div class="loader-content">
+                <div class="spinner"></div>
+                <p id="analysis-text">Analyzing report...</p>
+            </div>
+        </section>
+
+        <!-- Final Report Screen -->
+        <section id="report-screen" class="screen">
+            <h1 class="report-title">MISSION REPORT</h1>
+            <div class="report-content">
+                <div class="report-item">
+                    <span class="label">Status:</span>
+                    <span class="value">Successful</span>
+                </div>
+                <div class="report-item">
+                    <span class="label">Lunch:</span>
+                    <span class="value">Completed</span>
+                </div>
+                <div class="report-item">
+                    <span class="label">Bhakri:</span>
+                    <span class="value" id="report-bhakri">Completed</span>
+                </div>
+                <div class="report-item">
+                    <span class="label">Coffee:</span>
+                    <span class="value" id="report-coffee">Missing</span>
+                </div>
+                <div class="verdict">
+                    <span class="label">Overall Verdict:</span>
+                    <span class="value">Would Recommend.</span>
+                </div>
+            </div>
+            <div class="badge-container">
+                <div class="mission-badge">🏆</div>
+            </div>
+            <button id="internal-notes-btn" class="primary-btn">View Internal Notes</button>
+        </section>
+
+        <!-- Internal Notes Screens (Sequential) -->
+        <section id="notes-screen" class="screen">
+            <h2 class="notes-title">INTERNAL NOTES</h2>
+            <div class="notes-body">
+                <p id="note-text"></p>
+            </div>
+            <button id="notes-continue-btn" class="primary-btn">Continue</button>
+        </section>
+
+        <!-- Final Final Screen -->
+        <section id="final-screen" class="screen">
+            <h2 class="final-title">Case Closed.</h2>
+            <p>For now.</p>
+            <p class="small-text">End of Report.</p>
+            <button id="close-btn" class="primary-btn">Close File</button>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
