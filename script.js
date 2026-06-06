@@ -84,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCards('missed-options', true, 'missedThings');
 
     // Submit Action
+    const API_URL = "https://script.google.com/macros/s/AKfycbzWSaPCep4xeHYJ_yyf3L8J_ZO_8rlXju1eGEx6XZE5Yo6nCwI3u8mU5bqEeSalgIHC/exec";
+
     submitBtn.addEventListener('click', async () => {
         state.submittedAt = new Date().toISOString();
         showScreen('analysis-screen');
@@ -92,17 +94,26 @@ document.addEventListener('DOMContentLoaded', () => {
         runAnalysisSequence();
 
         // API POST
+        const payload = {
+            missionRating: state.missionRating,
+            highlights: state.highlights.join(", "),
+            cookingRating: state.cookingRating,
+            bhakriReview: state.bhakriReview,
+            missedThings: state.missedThings.join(", "),
+            userAgent: navigator.userAgent,
+            pageVersion: "1.0",
+            submittedAt: state.submittedAt
+        };
+
         try {
-            const response = await fetch('https://aayush10m.free.beeceptor.com/response', {
+            await fetch(API_URL, {
                 method: 'POST',
+                mode: 'no-cors', // Added to handle CORS with Google Apps Script
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(state)
+                body: JSON.stringify(payload)
             });
-            if (!response.ok) {
-                console.error('API Error:', response.statusText);
-            }
         } catch (error) {
             console.error('Fetch Error:', error);
         }
