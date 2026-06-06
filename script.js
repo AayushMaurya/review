@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupCards('missed-options', true, 'missedThings');
 
     // Submit Action
-    const API_URL = "https://script.google.com/macros/s/AKfycbzWSaPCep4xeHYJ_yyf3L8J_ZO_8rlXju1eGEx6XZE5Yo6nCwI3u8mU5bqEeSalgIHC/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzFEqyeolHxTGiAtapAO0g2qHytqLoCRtOTefpBMHLLnWPfgLJNEVeYkj7kDR9aMnax/exec";
 
     submitBtn.addEventListener('click', async () => {
         state.submittedAt = new Date().toISOString();
@@ -96,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // API POST
         const payload = {
             missionRating: state.missionRating,
-            highlights: state.highlights.join(", "),
+            highlights: state.highlights, // Send raw array
             cookingRating: state.cookingRating,
             bhakriReview: state.bhakriReview,
-            missedThings: state.missedThings.join(", "),
+            missedThings: state.missedThings, // Send raw array
             userAgent: navigator.userAgent,
             pageVersion: "1.0",
             submittedAt: state.submittedAt
@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             await fetch(API_URL, {
                 method: 'POST',
-                mode: 'no-cors', // Added to handle CORS with Google Apps Script
+                mode: 'no-cors',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'text/plain;charset=utf-8'
                 },
                 body: JSON.stringify(payload)
             });

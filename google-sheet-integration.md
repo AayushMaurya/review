@@ -132,7 +132,7 @@ Store as constant.
 
 Example:
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzWSaPCep4xeHYJ_yyf3L8J_ZO_8rlXju1eGEx6XZE5Yo6nCwI3u8mU5bqEeSalgIHC/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyCW2oXrVdgckX3whOrjz1qPz5oEOZwoYWf9Z6t48win0OVtbv0xbvAUyrdRmQYhZcA/exec";
 
 ---
 
